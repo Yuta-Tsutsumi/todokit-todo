@@ -1,7 +1,7 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import styles from "./Header.module.scss";
 
 export const Header: React.FC = () => {
@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
     <div className={styles.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={styles.root}>
+          <Typography variant="h6" className={styles.title}>
             News
           </Typography>
         </Toolbar>
