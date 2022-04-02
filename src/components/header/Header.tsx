@@ -7,10 +7,10 @@ import styles from "./Header.module.scss";
 export const Header: React.FC = () => {
   return (
     <div className={styles.root}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" className={styles.app_bar}>
+        <Toolbar className={styles.tool_bar}>
           <Typography variant="h6" className={styles.title}>
-            News
+            Rudux Toolkit Todo
           </Typography>
         </Toolbar>
       </AppBar>
