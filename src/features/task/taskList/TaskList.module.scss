@@ -1,0 +1,6 @@
+.root {
+  height: 50vh;
+  //↓スクロールをさせたいときに追加する。
+  overflow: hidden;
+  overflow-y: auto;
+}

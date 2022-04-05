@@ -16,6 +16,7 @@ export const TaskForm: React.FC = () => {
   //register（レジスター）として登録されたものに対してがdataとしてhandleCreateにわたされる
   const handleCreate = (data: Inputs) => {
     console.log(data);
+    reset();
   };
   return (
     <div className={styles.root}>
@@ -28,13 +29,13 @@ export const TaskForm: React.FC = () => {
         autoComplete="off"
       >
         <TextField
+          //パラメータ（エラー）
           id="outlined-basic"
           label="New Task"
           variant="outlined"
           //material-uiにreact-hook-formを追加する際に必要
-          inputRef={register}
+          {...register("taskTitle")}
           //dataの中にtaskTitleといったものが渡される
-          name="taskTitle"
           className={styles.text_field}
         />
       </form>
