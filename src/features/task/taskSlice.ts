@@ -2,14 +2,20 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
 import { fetchCount } from "./counterAPI";
 
-export interface CounterState {
-  value: number;
-  status: "idle" | "loading" | "failed";
+export interface taskState {
+  //taskが何個あるかを管理する
+  idCount: number;
+  //storeに保存するtaskの一覧
+  tasks: { id: number; title: string; completed: boolean };
+  //taskのtitleを編集する際にどのtaskが選択されているか
+  selectedTask: { id: number; title: string; completed: boolean };
+  //Modalを開くか閉じるかのフラグ
+  isModalOpen: boolean;
+  // status: "idle" | "loading" | "failed";
 }
 
-const initialState: CounterState = {
-  value: 0,
-  status: "idle",
+const initialState: taskState = {
+  // status: "idle",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
