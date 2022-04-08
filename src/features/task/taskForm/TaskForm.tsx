@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
+import { createTask } from "../taskSlice";
 import styles from "./TaskForm.module.scss";
 
 //typeでInputs変数を用意する
@@ -10,12 +12,13 @@ type Inputs = {
 };
 
 export const TaskForm: React.FC = () => {
+  const dispatch = useDispatch();
   //react-hook-formで用意されている関数で、使いたい関数を定義
   const { register, handleSubmit, reset } = useForm();
   //(data: Inputs)←taskTitleがdata型で渡される。
   //register（レジスター）として登録されたものに対してがdataとしてhandleCreateにわたされる
   const handleCreate = (data: Inputs) => {
-    console.log(data);
+    dispatch(createTask(data.taskTitle));
     reset();
   };
   return (
