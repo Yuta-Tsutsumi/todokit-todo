@@ -17,7 +17,7 @@ export const TaskItem: React.FC<PropTypes> = ({ task }) => {
       </div>
       <div className={styles.right_item}>
         <Checkbox
-          //チェックボックス
+          //チェックボックスの記述
           checked={task.completed}
           onClick={() => console.log(`check ${task.id}`)}
           className={styles.checkbox}
