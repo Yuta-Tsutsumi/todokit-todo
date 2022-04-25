@@ -18,6 +18,8 @@ export const TaskForm: React.FC = () => {
   //(data: Inputs)←taskTitleがdata型で渡される。
   //register（レジスター）として登録されたものに対してがdataとしてhandleCreateにわたされる
   const handleCreate = (data: Inputs) => {
+    // aaaと入力したものが想定通りだったら、下記のdata.taskTitleに反映され、画面に表示されるはず
+    // しかし、現状は画面に反映されていない
     dispatch(createTask(data.taskTitle));
     reset();
   };
