@@ -75,6 +75,9 @@
                 <mxCell id="53" value="export" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="1">
                     <mxGeometry x="60" y="220" width="80" height="30" as="geometry"/>
                 </mxCell>
+                <mxCell id="n6-gEUhtxflUrEq5RL_f-53" value="アクション&#10;− aaを入力バーに入力" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="305" width="150" height="45" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
