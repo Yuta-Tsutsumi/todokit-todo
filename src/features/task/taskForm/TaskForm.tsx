@@ -18,6 +18,8 @@ export const TaskForm: React.FC = () => {
   //(data: Inputs)←taskTitleがdata型で渡される。
   //register（レジスター）として登録されたものに対してがdataとしてhandleCreateにわたされる
   const handleCreate = (data: Inputs) => {
+    // aaaと入力したものが想定通りだったら、下記のdata.taskTitleに反映され、画面に表示されるはず
+    // しかし、現状は画面に反映されていない
     dispatch(createTask(data.taskTitle));
     reset();
   };
@@ -28,16 +30,19 @@ export const TaskForm: React.FC = () => {
         //そうする事でevent.target.valueと定義しなくてもreact-hook-formでフォームでの入力・編集の処理を簡単に実装できる。
         onSubmit={handleSubmit(handleCreate)}
         className={styles.form}
-        noValidate
-        autoComplete="off"
+        // noValidate
+        // autoComplete="off"
       >
         <TextField
           //パラメータ（エラー）
           id="outlined-basic"
           label="New Task"
           variant="outlined"
+          // inputRef={register}
+          // name="taskTitle"
+
           //material-uiにreact-hook-formを追加する際に必要
-          {...register("taskTitle")}
+          // {...register("taskTitle")}
           //dataの中にtaskTitleといったものが渡される
           className={styles.text_field}
         />
@@ -45,20 +50,3 @@ export const TaskForm: React.FC = () => {
     </div>
   );
 };
-
-{
-  /* <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="filled-basic" label="Filled" variant="filled" />
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-    </Box>; */
-}
-
-//↑Boxが毎回ついてくるこれなに
