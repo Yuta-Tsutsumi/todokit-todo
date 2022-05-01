@@ -30,17 +30,16 @@ export const TaskForm: React.FC = () => {
         //そうする事でevent.target.valueと定義しなくてもreact-hook-formでフォームでの入力・編集の処理を簡単に実装できる。
         onSubmit={handleSubmit(handleCreate)}
         className={styles.form}
-        // noValidate
-        // autoComplete="off"
+        noValidate
+        autoComplete="off"
       >
         <TextField
           //パラメータ（エラー）
           id="outlined-basic"
           label="New Task"
           variant="outlined"
-          // inputRef={register}
-          // name="taskTitle"
-
+          inputRef={register}
+          name="taskTitle"
           //material-uiにreact-hook-formを追加する際に必要
           // {...register("taskTitle")}
           //dataの中にtaskTitleといったものが渡される
