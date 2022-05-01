@@ -15,6 +15,7 @@ interface TaskState {
   isModalOpen: boolean;
 }
 
+//下記は最初のstateの値としてタスクを保持している
 const initialState: TaskState = {
   idCount: 1,
   tasks: [{ id: 1, title: "Task A", completed: false }],
@@ -26,7 +27,7 @@ const initialState: TaskState = {
 export const taskSlice = createSlice({
   name: "task",
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
+
   reducers: {
     //taskの作成
     createTask: (state, action) => {
