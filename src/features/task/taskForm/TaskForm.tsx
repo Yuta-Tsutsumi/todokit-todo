@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
 import { createTask } from "../taskSlice";
 import styles from "./TaskForm.module.scss";
 
@@ -33,7 +32,20 @@ export const TaskForm: React.FC = () => {
         noValidate
         autoComplete="off"
       >
-        <TextField
+        <input
+          //パラメータ（エラー）
+          id="outlined-basic"
+          placeholder="名前"
+          // label="New Task"
+          // variant="outlined"
+          // inputRef={register}
+          name="taskTitle"
+          //material-uiにreact-hook-formを追加する際に必要
+          // {...register("taskTitle")}
+          //dataの中にtaskTitleといったものが渡される
+          className={styles.text_field}
+        />
+        {/* <TextField
           //パラメータ（エラー）
           id="outlined-basic"
           label="New Task"
@@ -44,7 +56,7 @@ export const TaskForm: React.FC = () => {
           // {...register("taskTitle")}
           //dataの中にtaskTitleといったものが渡される
           className={styles.text_field}
-        />
+        /> */}
       </form>
     </div>
   );
