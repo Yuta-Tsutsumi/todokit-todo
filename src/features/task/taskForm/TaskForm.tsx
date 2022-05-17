@@ -12,6 +12,7 @@ type Inputs = {
 
 export const TaskForm: React.FC = () => {
   const dispatch = useDispatch();
+
   //react-hook-formで用意されている関数で、使いたい関数を定義
   const { register, handleSubmit, reset } = useForm();
   //(data: Inputs)←taskTitleがdata型で渡される。
@@ -35,28 +36,12 @@ export const TaskForm: React.FC = () => {
         <input
           //パラメータ（エラー）
           id="outlined-basic"
-          placeholder="名前"
-          // label="New Task"
-          // variant="outlined"
-          // inputRef={register}
+          placeholder="New Task"
+          type="text"
+          {...register("taskTitle", { required: true })}
           name="taskTitle"
-          //material-uiにreact-hook-formを追加する際に必要
-          // {...register("taskTitle")}
-          //dataの中にtaskTitleといったものが渡される
           className={styles.text_field}
         />
-        {/* <TextField
-          //パラメータ（エラー）
-          id="outlined-basic"
-          label="New Task"
-          variant="outlined"
-          inputRef={register}
-          name="taskTitle"
-          //material-uiにreact-hook-formを追加する際に必要
-          // {...register("taskTitle")}
-          //dataの中にtaskTitleといったものが渡される
-          className={styles.text_field}
-        /> */}
       </form>
     </div>
   );
