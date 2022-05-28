@@ -1,4 +1,4 @@
-import { StarRate } from "@material-ui/icons";
+import { Attachment, StarRate } from "@material-ui/icons";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState, AppThunk } from "../../app/store";
@@ -38,12 +38,19 @@ export const taskSlice = createSlice({
       };
       state.tasks = [newTask, ...state.tasks];
     },
+    //Modalを開くか閉じるかのフラグ管理
+    handleModalOpen: (state, action) => {
+      state.isModalOpen = action.payload;
+    },
   },
 });
 
-export const { createTask } = taskSlice.actions;
+export const { createTask, handleModalOpen } = taskSlice.actions;
 
 export const selectTask = (state: RootState): TaskState["tasks"] =>
   state.task.tasks;
+
+export const selectIsModalOpen = (state: RootState): TaskState["isModalOpen"] =>
+  state.task.isModalOpen;
 
 export default taskSlice.reducer;
