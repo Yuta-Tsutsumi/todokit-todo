@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { createTask } from "../taskSlice";
+import { createTask, handleModalOpen } from "../taskSlice";
 import styles from "./TaskForm.module.scss";
 
 //typeでInputs変数を用意する
@@ -10,7 +10,11 @@ type Inputs = {
   taskTitle: string;
 };
 
-export const TaskForm: React.FC = () => {
+type PropTypes = {
+  edit?: boolean;
+};
+
+export const TaskForm: React.FC<PropTypes> = ({ edit }) => {
   const dispatch = useDispatch();
 
   //react-hook-formで用意されている関数で、使いたい関数を定義
@@ -23,12 +27,15 @@ export const TaskForm: React.FC = () => {
     dispatch(createTask(data.taskTitle));
     reset();
   };
+  const handleEdit = (data: Inputs) => {
+    console.log(data);
+  };
   return (
     <div className={styles.root}>
       <form
         //handleSubmit（ハンドルサブミット）関数の中に16行目で定義した関数を渡す。
         //そうする事でevent.target.valueと定義しなくてもreact-hook-formでフォームでの入力・編集の処理を簡単に実装できる。
-        onSubmit={handleSubmit(handleCreate)}
+        onSubmit={edit ? handleSubmit(handleEdit) : handleSubmit(handleCreate)}
         className={styles.form}
         noValidate
         autoComplete="off"
@@ -37,11 +44,26 @@ export const TaskForm: React.FC = () => {
           //パラメータ（エラー）
           id="outlined-basic"
           placeholder="New Task"
+          defaultValue={edit ? "defaultValue" : ""}
           type="text"
           {...register("taskTitle", { required: true })}
           name="taskTitle"
           className={styles.text_field}
         />
+        {edit ? (
+          <div className={styles.button_wrapper}>
+            <button type="submit" className={styles.submit_button}>
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={() => dispatch(handleModalOpen(false))}
+              className={styles.cancel_button}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : null}
       </form>
     </div>
   );
