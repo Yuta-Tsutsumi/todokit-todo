@@ -55,11 +55,21 @@ export const taskSlice = createSlice({
     handleModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
     },
+    //task完了・未完了のチェックを変更
+    completeTask: (state, action) => {
+      //state,tasksの中から指定したtaskを抜き出す
+      const task = state.tasks.find((t) => t.id === action.payload.id);
+    },
   },
 });
 
-export const { createTask, editTask, selectTask, handleModalOpen } =
-  taskSlice.actions;
+export const {
+  createTask,
+  editTask,
+  selectTask,
+  handleModalOpen,
+  completeTask,
+} = taskSlice.actions;
 
 export const selectTasks = (state: RootState): TaskState["tasks"] =>
   state.task.tasks;
