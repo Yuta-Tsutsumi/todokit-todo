@@ -1,7 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { createTask, handleModalOpen } from "../taskSlice";
+import {
+  createTask,
+  editTask,
+  handleModalOpen,
+  selectSelectedTask,
+} from "../taskSlice";
 import styles from "./TaskForm.module.scss";
 
 //typeでInputs変数を用意する
@@ -16,7 +21,7 @@ type PropTypes = {
 
 export const TaskForm: React.FC<PropTypes> = ({ edit }) => {
   const dispatch = useDispatch();
-
+  const selectedTask = useSelector(selectSelectedTask);
   //react-hook-formで用意されている関数で、使いたい関数を定義
   const { register, handleSubmit, reset } = useForm();
   //(data: Inputs)←taskTitleがdata型で渡される。
@@ -28,6 +33,9 @@ export const TaskForm: React.FC<PropTypes> = ({ edit }) => {
     reset();
   };
   const handleEdit = (data: Inputs) => {
+    const sendData = { ...selectedTask, title: data.taskTitle };
+    dispatch(editTask(sendData));
+    dispatch(handleModalOpen(false));
     console.log(data);
   };
   return (
@@ -43,8 +51,8 @@ export const TaskForm: React.FC<PropTypes> = ({ edit }) => {
         <input
           //パラメータ（エラー）
           id="outlined-basic"
-          placeholder="New Task"
-          defaultValue={edit ? "defaultValue" : ""}
+          placeholder={edit ? "edit Task" : "New Task"}
+          defaultValue={edit ? selectedTask.title : ""}
           type="text"
           {...register("taskTitle", { required: true })}
           name="taskTitle"
