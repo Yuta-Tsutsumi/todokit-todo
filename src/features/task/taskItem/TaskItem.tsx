@@ -1,9 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {
+  deleteTask,
+  selectTask,
+  completeTask,
+  handleModalOpen,
+  selectIsModalOpen,
+} from "../taskSlice";
 import Modal from "@material-ui/core//Modal";
+import { TaskForm } from "../taskForm/TaskForm";
 import styles from "./TaskItem.module.scss";
 
 interface PropTypes {
@@ -11,12 +20,14 @@ interface PropTypes {
 }
 
 export const TaskItem: React.FC<PropTypes> = ({ task }) => {
-  const [open, setOpen] = React.useState(false);
+  const isModalOpen = useSelector(selectIsModalOpen);
+  const dispatch = useDispatch();
   const handleOpen = () => {
-    setOpen(true);
+    dispatch(selectTask(task));
+    dispatch(handleModalOpen(true));
   };
   const handleClose = () => {
-    setOpen(false);
+    dispatch(handleModalOpen(false));
   };
   return (
     <div className={styles.root}>
@@ -28,29 +39,25 @@ export const TaskItem: React.FC<PropTypes> = ({ task }) => {
         <Checkbox
           //チェックボックスの記述
           checked={task.completed}
-          onClick={() => console.log(`check ${task.id}`)}
+          onClick={() => dispatch(completeTask(task))}
           className={styles.checkbox}
         />
-        <button
-          onClick={() => console.log(`edit ${task.id}`)}
-          className={styles.edit_button}
-        >
+        <button onClick={handleOpen} className={styles.edit_button}>
           <EditIcon className={styles.icon} />
         </button>
+        {/* 削除ボタン */}
         <button
-          onClick={() => console.log(`delete ${task.id}`)}
+          onClick={() => dispatch(deleteTask(task))}
           className={styles.delete_button}
         >
           <DeleteIcon className={styles.icon} />
         </button>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div>モーダル！</div>
+      <Modal open={isModalOpen} onClose={handleClose} className={styles.modal}>
+        <div className={styles.modal_content}>
+          <div className={styles.modal_title}>Edit</div>
+          <TaskForm edit />
+        </div>
       </Modal>
     </div>
   );
